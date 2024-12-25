@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
+
 <?php 
 include "koneksi.php";
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
@@ -12,7 +13,6 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
 $message = "";
-$content = ""; // Variable to store dynamic content
 
 if (isset($_POST['submit'])) {
     // Cek apakah NIM sudah ada
@@ -40,36 +40,8 @@ if (isset($_POST['submit'])) {
         }
     }
 }
-
-if (isset($_POST['action'])) {
-    // Handle specific button actions
-    switch ($_POST['action']) {
-        case 'statistik':
-            // Include or load content for Statistik 5 Serangkai
-            ob_start();
-            include "statistik-5-serangkai.php";
-            $content = ob_get_clean();
-            break;
-
-        case 'pencilan':
-            // Include or load content for Data Pencilan
-            ob_start();
-            include "data-pencilan.php";
-            $content = ob_get_clean();
-            break;
-
-        case 'standar_deviasi':
-            // Include or load content for Standar Deviasi
-            ob_start();
-            include "standar-deviasi.php";
-            $content = ob_get_clean();
-            break;
-
-        default:
-            $content = "Aksi tidak dikenali.";
-    }
-}
 ?>
+
 
 <body>
     <div class="container">
@@ -104,22 +76,5 @@ if (isset($_POST['action'])) {
             </div>
             <button type="submit" value="submit" name="submit" class="btn">Submit</button>
         </form>
-        <div class="button">
-        <form action="" method="POST" style="display: inline;">
-            <button type="submit" name="action" value="statistik" class="btn">Lihat Statistik 5 Serangkai</button>
-        </form>
-        <form action="" method="POST" style="display: inline;">
-            <button type="submit" name="action" value="pencilan" class="btn">Lihat Data Pencilan</button>
-        </form>
-        <form action="" method="POST" style="display: inline;">
-            <button type="submit" name="action" value="standar_deviasi" class="btn">Hitung Standar Deviasi</button>
-        </form>
     </div>
-
-    <div id="result">
-        <?= $content; ?>
-    </div>
-    </div>
-
-
 </body>
